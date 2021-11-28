@@ -12,7 +12,6 @@ class IconContentWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          // Icons.female,
           icon,
           size: 100.0,
         ),

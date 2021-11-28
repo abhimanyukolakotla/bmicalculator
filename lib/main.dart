@@ -22,7 +22,7 @@ void main() {
             ),
           ),
         ),
-        body: InputPage(),
+        body: const InputPage(),
       ),
     ),
   );
