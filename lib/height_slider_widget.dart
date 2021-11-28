@@ -47,7 +47,7 @@ class HeightSliderWidgetState extends State<HeightSliderWidget> {
             divisions: 200,
             activeColor: Colors.white,
             inactiveColor: Colors.white,
-            thumbColor: Colors.red,
+            thumbColor: Colors.teal,
             label: _currentSliderValue.round().toString(),
             onChanged: (double value) {
               setState(() {
@@ -72,8 +72,7 @@ class CustomTrackShape extends RoundedRectSliderTrackShape {
   }) {
     final double? trackHeight = sliderTheme.trackHeight! / 3;
     final double trackLeft = offset.dx + 20;
-    final double trackTop =
-        offset.dy; //+ (parentBox.size.height - trackHeight!);
+    final double trackTop = offset.dy; //(parentBox.size.height - trackHeight!);
     final double trackWidth = parentBox.size.width - 40;
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight!);
   }

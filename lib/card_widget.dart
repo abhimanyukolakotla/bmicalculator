@@ -9,7 +9,7 @@ class CardWidget extends StatelessWidget {
     return Expanded(
       child: Container(
         color: const Color(0xFF0A0E21),
-        margin: const EdgeInsets.all(15.0),
+        margin: const EdgeInsets.all(10.0),
         child: child,
       ),
     );

@@ -10,7 +10,7 @@ void main() {
           fontFamily: "IBMPlexSans-Thin",
           colorScheme: ThemeData.dark().colorScheme.copyWith(
                 primary: const Color(0xFF0A0E21),
-                secondary: Colors.purple,
+                secondary: Colors.teal,
               )),
       home: Scaffold(
         appBar: AppBar(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'card_widget.dart';
 import 'height_slider_widget.dart';
 import 'icon_content_widget.dart';
+import 'number_incrementor_widget.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class _InputPageState extends State<InputPage> {
                             valueIndicatorTextStyle:
                                 const TextStyle(fontSize: 40.0),
                           ),
-                          child: HeightSliderWidget()),
+                          child: const HeightSliderWidget()),
                     ],
                   ),
                 ),
@@ -58,7 +59,7 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: const [
-                CardWidget(child: Text("weight")),
+                CardWidget(child: NumberIncrementorWidget()),
                 CardWidget(child: Text("age")),
               ],
             ),
