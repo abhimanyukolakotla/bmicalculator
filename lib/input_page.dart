@@ -21,9 +21,20 @@ class _InputPageState extends State<InputPage> {
   int height = 0;
   int weight = 0;
   int age = 0;
-
+  String bmi = "";
+  IconData bmiStatusIcon = Icons.thumb_up_outlined;
   onWeightChange(int value) {
     weight = value;
+  }
+
+  calculateBmi() {
+    var bmiDouble = ((weight / (height * height)) * 10000);
+    bmi = bmiDouble.toStringAsFixed(2);
+    if (bmiDouble >= 20) {
+      bmiStatusIcon = Icons.thumb_up;
+    } else {
+      bmiStatusIcon = Icons.thumb_down;
+    }
   }
 
   @override
@@ -130,32 +141,47 @@ class _InputPageState extends State<InputPage> {
                       backgroundColor:
                           MaterialStateProperty.all(kSecondaryColor),
                     ),
-                    onPressed: () => showDialog<String>(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        backgroundColor: kInactiveCardColor,
-                        title: const Text(
-                          'BMI Calculator',
-                        ),
-                        content: Text(
-                          'Your BMI is ${((weight / (height * height)) * 10000).toStringAsFixed(2)}',
-                          style: const TextStyle(fontSize: 30.0),
-                        ),
-                        actions: <Widget>[
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(kSecondaryColor),
-                            ),
-                            onPressed: () => Navigator.pop(context, 'OK'),
-                            child: const Text(
-                              'OK',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                    onPressed: () {
+                      calculateBmi();
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          backgroundColor: kInactiveCardColor,
+                          title: const Text(
+                            'Your BMI',
                           ),
-                        ],
-                      ),
-                    ),
+                          content: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                bmi,
+                                style: const TextStyle(
+                                    fontSize: 50.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(
+                                bmiStatusIcon,
+                                size: 50.0,
+                              ),
+                            ],
+                          ),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(kSecondaryColor),
+                              ),
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text(
+                                'OK',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                     child: const Center(
                       child: Text(
                         "CALCULATE",
