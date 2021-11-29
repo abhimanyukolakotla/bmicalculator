@@ -127,11 +127,35 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.teal),
+                      backgroundColor:
+                          MaterialStateProperty.all(kSecondaryColor),
                     ),
-                    onPressed: () {
-                      print("BMI is ${(weight / (height * height)) * 10000}");
-                    },
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        backgroundColor: kInactiveCardColor,
+                        title: const Text(
+                          'BMI Calculator',
+                        ),
+                        content: Text(
+                          'Your BMI is ${((weight / (height * height)) * 10000).toStringAsFixed(2)}',
+                          style: const TextStyle(fontSize: 30.0),
+                        ),
+                        actions: <Widget>[
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(kSecondaryColor),
+                            ),
+                            onPressed: () => Navigator.pop(context, 'OK'),
+                            child: const Text(
+                              'OK',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     child: const Center(
                       child: Text(
                         "CALCULATE",
