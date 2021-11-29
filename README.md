@@ -1,5 +1,5 @@
 # bmicalculator
-Flutter app to help calculating BMI
+Flutter app to help calculating Body Mass Index (BMI)
 
 ## Getting Started
 ### Development environment setup 
