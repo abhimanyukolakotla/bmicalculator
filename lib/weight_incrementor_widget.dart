@@ -2,26 +2,35 @@ import 'package:flutter/material.dart';
 
 import 'number_adjust_widget.dart';
 
-class NumberIncrementorWidget extends StatefulWidget {
-  const NumberIncrementorWidget({Key? key}) : super(key: key);
+class WeightIncrementorWidget extends StatefulWidget {
+  final Function? onChanged;
+  const WeightIncrementorWidget({Key? key, this.onChanged}) : super(key: key);
 
   @override
-  State<NumberIncrementorWidget> createState() =>
-      NumberIncrementorWidgetState();
+  State<WeightIncrementorWidget> createState() =>
+      WeightIncrementorWidgetState();
 }
 
-class NumberIncrementorWidgetState extends State<NumberIncrementorWidget> {
-  int _counter = 0;
+class WeightIncrementorWidgetState extends State<WeightIncrementorWidget> {
+  int _counter = 50;
+
+  @override
+  initState() {
+    super.initState();
+    widget.onChanged!(_counter);
+  }
 
   increment() {
     setState(() {
       _counter += 1;
+      widget.onChanged!(_counter);
     });
   }
 
   decrement() {
     setState(() {
       if (_counter > 0) _counter -= 1;
+      widget.onChanged!(_counter);
     });
   }
 
@@ -42,8 +51,9 @@ class NumberIncrementorWidgetState extends State<NumberIncrementorWidget> {
         Expanded(
           flex: 1,
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
                 "$_counter",

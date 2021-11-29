@@ -1,3 +1,4 @@
+import 'package:bmicalculator/constants.dart';
 import 'package:bmicalculator/input_page.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +10,8 @@ void main() {
           scaffoldBackgroundColor: Colors.black,
           fontFamily: "IBMPlexSans-Thin",
           colorScheme: ThemeData.dark().colorScheme.copyWith(
-                primary: const Color(0xFF0A0E21),
-                secondary: Colors.teal,
+                primary: kPrimaryColor,
+                secondary: kSecondaryColor,
               )),
       home: Scaffold(
         appBar: AppBar(

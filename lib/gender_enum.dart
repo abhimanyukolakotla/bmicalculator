@@ -1,1 +1,1 @@
-enum SexCode { male, female }
+enum Gender { male, female }

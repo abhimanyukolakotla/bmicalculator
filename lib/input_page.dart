@@ -1,13 +1,12 @@
-import 'package:bmicalculator/sex_code.dart';
+import 'package:bmicalculator/age_incrementor_widget.dart';
+import 'package:bmicalculator/gender_enum.dart';
 import 'package:flutter/material.dart';
 
 import 'card_widget.dart';
+import 'constants.dart';
 import 'height_slider_widget.dart';
 import 'icon_content_widget.dart';
-import 'number_incrementor_widget.dart';
-
-const Color activeCardColor = Color(0xFF595B6C);
-const Color inactiveCardColor = Color(0XFF111328);
+import 'weight_incrementor_widget.dart';
 
 //0xFF1D1E33
 class InputPage extends StatefulWidget {
@@ -18,17 +17,13 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveCardColor;
-  Color femaleCardColor = inactiveCardColor;
+  Gender? selected;
+  int height = 0;
+  int weight = 0;
+  int age = 0;
 
-  updateCardColor(SexCode gender) {
-    if (gender == SexCode.male) {
-      maleCardColor = activeCardColor;
-      femaleCardColor = inactiveCardColor;
-    } else {
-      maleCardColor = inactiveCardColor;
-      femaleCardColor = activeCardColor;
-    }
+  onWeightChange(int value) {
+    weight = value;
   }
 
   @override
@@ -37,19 +32,22 @@ class _InputPageState extends State<InputPage> {
       child: Column(
         children: [
           Expanded(
+            flex: 3,
             child: Row(
               children: [
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateCardColor(SexCode.male);
+                        selected = Gender.male;
                       });
                     },
                     child: CardWidget(
-                      color: maleCardColor,
+                      color: selected == Gender.male
+                          ? kActiveCardColor
+                          : kInactiveCardColor,
                       child: const IconContentWidget(
-                          icon: Icons.male, text: "Male"),
+                          icon: Icons.male, text: "MALE"),
                     ),
                   ),
                 ),
@@ -57,13 +55,15 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateCardColor(SexCode.female);
+                        selected = Gender.female;
                       });
                     },
                     child: CardWidget(
-                      color: femaleCardColor,
+                      color: selected == Gender.female
+                          ? kActiveCardColor
+                          : kInactiveCardColor,
                       child: const IconContentWidget(
-                          icon: Icons.female, text: "Female"),
+                          icon: Icons.female, text: "FEMALE"),
                     ),
                   ),
                 ),
@@ -71,6 +71,7 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
+            flex: 3,
             child: Row(
               children: [
                 Expanded(
@@ -85,12 +86,18 @@ class _InputPageState extends State<InputPage> {
                           ),
                         ),
                         SliderTheme(
-                            data: SliderThemeData(
-                              trackShape: CustomTrackShape(),
-                              valueIndicatorTextStyle:
-                                  const TextStyle(fontSize: 40.0),
-                            ),
-                            child: const HeightSliderWidget()),
+                          data: SliderThemeData(
+                            trackShape: CustomTrackShape(),
+                            overlayColor: kOverlayColor,
+                            overlayShape: const RoundSliderOverlayShape(
+                                overlayRadius: 30.0),
+                            valueIndicatorTextStyle:
+                                const TextStyle(fontSize: 40.0),
+                          ),
+                          child: HeightSliderWidget(onChanged: (value) {
+                            height = value;
+                          }),
+                        ),
                       ],
                     ),
                   ),
@@ -99,13 +106,46 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
+            flex: 3,
             child: Row(
-              children: const [
-                Expanded(child: CardWidget(child: NumberIncrementorWidget())),
-                Expanded(child: CardWidget(child: Text("age"))),
+              children: [
+                Expanded(
+                    child: CardWidget(
+                        child: WeightIncrementorWidget(
+                            onChanged: onWeightChange))),
+                Expanded(
+                  child: CardWidget(child: AgeIncrementorWidget()),
+                )
               ],
             ),
           ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.teal),
+                    ),
+                    onPressed: () {
+                      print("BMI is ${(weight / (height * height)) * 10000}");
+                    },
+                    child: const Center(
+                      child: Text(
+                        "CALCULATE",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
