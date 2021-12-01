@@ -8,18 +8,14 @@ class NumberAdjustWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Center(
-        child: FloatingActionButton(
-          // backgroundColor: Color(0xFF232324),
-          // backgroundColor: const Color.fromRGBO(66, 66, 66, 1),
-          foregroundColor: Colors.white,
-          onPressed: () {
-            onPressed?.call();
-          },
-          child: Icon(icon),
-        ),
-      ),
+    return FloatingActionButton(
+      // backgroundColor: Color(0xFF232324),
+      // backgroundColor: const Color.fromRGBO(66, 66, 66, 1),
+      foregroundColor: Colors.white,
+      onPressed: () {
+        onPressed?.call();
+      },
+      child: Icon(icon),
     );
   }
 }

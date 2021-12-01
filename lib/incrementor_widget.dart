@@ -2,36 +2,45 @@ import 'package:flutter/material.dart';
 
 import 'number_adjust_widget.dart';
 
-class WeightIncrementorWidget extends StatefulWidget {
+class IncrementorWidget extends StatefulWidget {
   final Function? onChanged;
-  const WeightIncrementorWidget({Key? key, this.onChanged}) : super(key: key);
+  final String label;
+  final String units;
+  const IncrementorWidget(
+      {Key? key, required this.label, required this.units, this.onChanged})
+      : super(key: key);
 
   @override
-  State<WeightIncrementorWidget> createState() =>
-      WeightIncrementorWidgetState();
+  State<IncrementorWidget> createState() => IncrementorWidgetState();
 }
 
-class WeightIncrementorWidgetState extends State<WeightIncrementorWidget> {
-  int _counter = 50;
+class IncrementorWidgetState extends State<IncrementorWidget> {
+  int _counter = 30;
 
   @override
   initState() {
     super.initState();
-    widget.onChanged!(_counter);
+    if (widget.onChanged != null) widget.onChanged!(_counter);
   }
 
   increment() {
     setState(() {
       _counter += 1;
-      widget.onChanged!(_counter);
+      updateWidget();
     });
   }
 
   decrement() {
     setState(() {
       if (_counter > 0) _counter -= 1;
-      widget.onChanged!(_counter);
+      updateWidget();
     });
+  }
+
+  updateWidget() {
+    if (widget.onChanged != null) {
+      widget.onChanged!(_counter);
+    }
   }
 
   @override
@@ -39,12 +48,12 @@ class WeightIncrementorWidgetState extends State<WeightIncrementorWidget> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Expanded(
+        Expanded(
           flex: 1,
           child: Center(
             child: Text(
-              "Weight",
-              style: TextStyle(fontSize: 20.0),
+              widget.label,
+              style: const TextStyle(fontSize: 20.0),
             ),
           ),
         ),
@@ -64,9 +73,9 @@ class WeightIncrementorWidgetState extends State<WeightIncrementorWidget> {
               ),
               Container(
                 margin: const EdgeInsets.only(left: 4.0, bottom: 6.0),
-                child: const Text(
-                  "kgs",
-                  style: TextStyle(
+                child: Text(
+                  widget.units,
+                  style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -84,6 +93,7 @@ class WeightIncrementorWidgetState extends State<WeightIncrementorWidget> {
                 icon: Icons.add,
                 onPressed: increment,
               ),
+              const SizedBox(width: 10.0),
               NumberAdjustWidget(
                 icon: Icons.remove,
                 onPressed: decrement,

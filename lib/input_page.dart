@@ -1,12 +1,11 @@
-import 'package:bmicalculator/age_incrementor_widget.dart';
 import 'package:bmicalculator/gender_enum.dart';
+import 'package:bmicalculator/incrementor_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'card_widget.dart';
 import 'constants.dart';
 import 'height_slider_widget.dart';
 import 'icon_content_widget.dart';
-import 'weight_incrementor_widget.dart';
 
 //0xFF1D1E33
 class InputPage extends StatefulWidget {
@@ -122,10 +121,18 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                     child: CardWidget(
-                        child: WeightIncrementorWidget(
+                        child: IncrementorWidget(
+                            label: "Weight",
+                            units: "kgs",
                             onChanged: onWeightChange))),
-                Expanded(
-                  child: CardWidget(child: AgeIncrementorWidget()),
+                const Expanded(
+                  child: CardWidget(
+                    child: IncrementorWidget(
+                      label: "Age",
+                      units: "yrs",
+                      // onChanged: (int value) {},
+                    ),
+                  ),
                 )
               ],
             ),
