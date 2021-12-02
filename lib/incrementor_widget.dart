@@ -89,12 +89,12 @@ class IncrementorWidgetState extends State<IncrementorWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              NumberAdjustWidget(
+              NumberAdjustWidgetStateful(
                 icon: Icons.add,
                 onPressed: increment,
               ),
               const SizedBox(width: 10.0),
-              NumberAdjustWidget(
+              NumberAdjustWidgetStateful(
                 icon: Icons.remove,
                 onPressed: decrement,
               ),
