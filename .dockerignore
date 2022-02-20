@@ -1,0 +1,5 @@
+ios/
+test/
+android/
+.dart_tool
+.idea/
