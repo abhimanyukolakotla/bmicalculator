@@ -67,7 +67,7 @@ class IncrementorWidgetState extends State<IncrementorWidget> {
               Text(
                 "$_counter",
                 style: const TextStyle(
-                  fontSize: 40.0,
+                  fontSize: 30.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),

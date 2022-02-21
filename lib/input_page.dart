@@ -89,7 +89,7 @@ class _InputPageState extends State<InputPage> {
                     child: Column(
                       children: [
                         const Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(3.0),
                           child: Text(
                             "Height",
                             style: TextStyle(fontSize: 20.0),
